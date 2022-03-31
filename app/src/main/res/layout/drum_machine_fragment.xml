@@ -25,60 +25,84 @@
             android:layout_marginRight="10dp">
             <ImageView
                 android:id="@+id/beat1"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat1" />
             <ImageView
                 android:id="@+id/beat2"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat2"/>
             <ImageView
                 android:id="@+id/beat3"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat3"/>
             <ImageView
                 android:id="@+id/beat4"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat4"/>
             <ImageView
                 android:id="@+id/beat5"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat5"/>
             <ImageView
                 android:id="@+id/beat6"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat6"/>
             <ImageView
                 android:id="@+id/beat7"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat7"/>
             <ImageView
                 android:id="@+id/beat8"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:contentDescription="beat8"/>
         </LinearLayout>
 
         <!-- Snippet from "Add buttons" section goes here. -->

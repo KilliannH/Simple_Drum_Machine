@@ -2,13 +2,14 @@ package com.google.codelabs.mdc.kotlin.shrine
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.Editable
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.google.codelabs.mdc.kotlin.shrine.models.Beat
 import kotlinx.android.synthetic.main.drum_machine_fragment.view.*
 
 /**
@@ -24,23 +25,33 @@ class DrumMachineFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.drum_machine_fragment, container, false)
 
-        val beats:ArrayList<ImageView> = ArrayList<ImageView>()
+        val beats:ArrayList<Beat> = ArrayList<Beat>()
 
         val count:Int = view.beatsGroup.childCount
 
-        var lastBeat: ImageView? = null
+        var lastBeat: Beat? = null
 
         var beatIndex = 0
 
         // add beats from beatsGroup layout
         for (i in 0 until count) {
-            beats.add(view.beatsGroup.getChildAt(i) as ImageView)
+            beats.add(Beat(view.beatsGroup.getChildAt(i) as ImageView))
         }
 
-        fun tickCb() {
-            beats[beatIndex].setImageResource(R.drawable.rectangle_active)
+        for (i in 0 until count) {
+            beats[i].imageView.setOnClickListener {
+                beats[i].toggleActive()
+            }
+        }
+
+            fun tickCb() {
+            beats[beatIndex].imageView.setImageResource(R.drawable.rectangle_playing)
             if(lastBeat !== null) {
-                lastBeat!!.setImageResource(R.drawable.rectangle_default)
+                if(lastBeat!!.enabled) {
+                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_active)
+                } else {
+                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_default)
+                }
             }
             lastBeat = beats[beatIndex]
             if(beatIndex == 7) {
@@ -52,7 +63,7 @@ class DrumMachineFragment : Fragment() {
 
         // Set an error if the password is less than 8 characters.
         view.play_button.setOnClickListener {
-            val timer = object: CountDownTimer(20000, 1000) {
+            val timer = object: CountDownTimer(20000, 500) {
                 override fun onTick(millisUntilFinished: Long) {
                     tickCb()
                 }
