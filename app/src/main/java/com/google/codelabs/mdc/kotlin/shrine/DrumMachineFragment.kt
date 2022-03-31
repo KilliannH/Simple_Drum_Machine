@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.google.codelabs.mdc.kotlin.shrine.models.Beat
+import com.google.codelabs.mdc.kotlin.shrine.timer.CountUpTimer
 import kotlinx.android.synthetic.main.drum_machine_fragment.view.*
 
 /**
@@ -63,12 +64,10 @@ class DrumMachineFragment : Fragment() {
 
         // Set an error if the password is less than 8 characters.
         view.play_button.setOnClickListener {
-            val timer = object: CountDownTimer(20000, 500) {
-                override fun onTick(millisUntilFinished: Long) {
+            val timer = object: CountUpTimer(500) {
+                override fun onTick(millisElapsed: Long) {
                     tickCb()
                 }
-
-                override fun onFinish() {Log.d("debug", "Finished!");}
             }
             timer.start()
         }
