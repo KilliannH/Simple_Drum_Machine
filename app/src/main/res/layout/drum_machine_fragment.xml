@@ -17,6 +17,73 @@
         android:paddingTop="16dp">
 
         <LinearLayout
+            android:id="@+id/beatsGroup2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <RelativeLayout
+                android:id="@+id/mixer1"
+                android:src="@drawable/rectangle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:contentDescription="mixer1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@color/defaultMixerColor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mixer2"
+                android:src="@drawable/rectangle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:contentDescription="mixer2">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@color/defaultMixerColor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mixer3"
+                android:src="@drawable/rectangle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:contentDescription="mixer3">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@color/defaultMixerColor" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/beatsGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
