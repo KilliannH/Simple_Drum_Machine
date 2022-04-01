@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:circular="http://schemas.android.com/apk/res-auto"
     android:background="@color/drumMachinePageBackgroundColor"
     tools:context=".DrumMachineFragment">
 
@@ -17,7 +18,7 @@
         android:paddingTop="16dp">
 
         <LinearLayout
-            android:id="@+id/beatsGroup2"
+            android:id="@+id/mixersGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -38,16 +39,27 @@
                 android:contentDescription="mixer1"
                 android:orientation="vertical">
 
+                <me.angrybyte.circularslider.CircularSlider
+                    android:id="@+id/circular1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    circular:border_color="#505090"
+                    circular:border_thickness="10dp"
+                    circular:thumb_color="#30AEFF"
+                    circular:thumb_size="12dp" />
+
 
                 <ImageView
+                    android:id="@+id/mixer1_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@color/defaultMixerColor" />
+                    android:src="@drawable/mixer_default" />
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/mixer2"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
@@ -57,17 +69,30 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="100dp"
                 android:layout_height="200dp"
-                android:contentDescription="mixer2">
+                android:contentDescription="mixer2"
+                android:orientation="vertical">
+
+                <me.angrybyte.circularslider.CircularSlider
+                    android:id="@+id/circular2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    circular:border_color="#505090"
+                    circular:border_thickness="10dp"
+                    circular:thumb_color="#30AEFF"
+                    circular:thumb_size="12dp" />
+
 
                 <ImageView
+                    android:id="@+id/mixer2_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@color/defaultMixerColor" />
-            </RelativeLayout>
+                    android:src="@drawable/mixer_default" />
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/mixer3"
                 android:src="@drawable/rectangle_default"
                 android:layout_marginStart="5dp"
@@ -77,15 +102,28 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="100dp"
                 android:layout_height="200dp"
-                android:contentDescription="mixer3">
+                android:contentDescription="mixer3"
+                android:orientation="vertical">
+
+                <me.angrybyte.circularslider.CircularSlider
+                    android:id="@+id/circular3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    circular:border_color="#505090"
+                    circular:border_thickness="10dp"
+                    circular:thumb_color="#30AEFF"
+                    circular:thumb_size="12dp" />
+
 
                 <ImageView
+                    android:id="@+id/mixer3_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@color/defaultMixerColor" />
-            </RelativeLayout>
+                    android:src="@drawable/mixer_default" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
