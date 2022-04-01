@@ -6,6 +6,7 @@ import com.google.codelabs.mdc.kotlin.shrine.R
 class Mixer(val enabledButtonImageView: ImageView) {
 
     var enabled = false
+    var steps: ArrayList<Boolean> = ArrayList<Boolean>()
 
     fun toggleActive() {
         if(enabled) {

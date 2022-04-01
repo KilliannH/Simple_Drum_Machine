@@ -42,21 +42,35 @@ class DrumMachineFragment : Fragment() {
             beats.add(Beat(view.beatsGroup.getChildAt(i) as ImageView))
         }
 
-        for (i in 0 until beatsCount) {
-            beats[i].imageView.setOnClickListener {
-                beats[i].toggleActive()
-            }
-        }
-
         // add mixers from mixersGroup layout
         for(i in 0 until mixersCount) {
             val mixerLayout: LinearLayout = view.mixersGroup.getChildAt(i) as LinearLayout
             mixers.add(Mixer(mixerLayout.getChildAt(1) as ImageView))
         }
 
+        // enable the first mixer by default
+        mixers[0].toggleActive()
+        var activeMixer: Mixer = mixers[0]
+
+        for (i in 0 until beatsCount) {
+            beats[i].imageView.setOnClickListener {
+                beats[i].toggleActive()
+                activeMixer.steps[i] = !activeMixer.steps[i]
+
+                // logs to see if original mixer has effectively changed, and it has.
+                Log.d("mixerrrrrs", mixers.map { i -> i.steps }.toString())
+                Log.d("active mixerrrrr", activeMixer.steps.toString())
+            }
+        }
+
         for (i in 0 until mixersCount) {
             mixers[i].enabledButtonImageView.setOnClickListener {
                 mixers[i].toggleActive()
+            }
+
+            // init steps of each mixers to false
+            for(j in 0 until beatsCount) {
+                mixers[i].steps.add(false)
             }
         }
 
