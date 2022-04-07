@@ -27,6 +27,8 @@ class DrumMachineFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.drum_machine_fragment, container, false)
 
+        var isPlaying = false
+
         val beats:ArrayList<Beat> = ArrayList<Beat>()
         val mixers:ArrayList<Mixer> = ArrayList<Mixer>()
 
@@ -63,6 +65,29 @@ class DrumMachineFragment : Fragment() {
             }
         }
 
+        fun tickCb() {
+            beats[beatIndex].imageView.setImageResource(R.drawable.rectangle_playing)
+            if(lastBeat !== null) {
+                if(lastBeat!!.enabled) {
+                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_active)
+                } else {
+                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_default)
+                }
+            }
+            lastBeat = beats[beatIndex]
+            if(beatIndex == 7) {
+                beatIndex = 0;
+            } else {
+                beatIndex++
+            }
+        }
+
+        var timer = object : CountUpTimer(500) {
+            override fun onTick(millisElapsed: Long) {
+                tickCb()
+            }
+        }
+
         fun updateBeats() {
             for (i in 0 until beats.size) {
                 if(activeMixer.steps[i]) {
@@ -93,30 +118,16 @@ class DrumMachineFragment : Fragment() {
             }
         }
 
-        fun tickCb() {
-            beats[beatIndex].imageView.setImageResource(R.drawable.rectangle_playing)
-            if(lastBeat !== null) {
-                if(lastBeat!!.enabled) {
-                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_active)
-                } else {
-                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_default)
-                }
-            }
-            lastBeat = beats[beatIndex]
-            if(beatIndex == 7) {
-                beatIndex = 0;
-            } else {
-                beatIndex++
-            }
-        }
-
         view.play_button.setOnClickListener {
-            val timer = object: CountUpTimer(500) {
-                override fun onTick(millisElapsed: Long) {
-                    tickCb()
-                }
+            isPlaying = !isPlaying
+            if(isPlaying) {
+                view.play_button.setText(R.string.stop_button)
+                timer.start()
+            } else {
+                view.play_button.setText(R.string.play_button)
+                timer.stop()
+                // do smthg to reset the timer & current beat index & unpaint active beat (red)
             }
-            timer.start()
         }
 
         return view
