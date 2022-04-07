@@ -58,14 +58,33 @@ class DrumMachineFragment : Fragment() {
                 activeMixer.steps[i] = !activeMixer.steps[i]
 
                 // logs to see if original mixer has effectively changed, and it has.
-                Log.d("mixerrrrrs", mixers.map { i -> i.steps }.toString())
-                Log.d("active mixerrrrr", activeMixer.steps.toString())
+                // Log.d("mixerrrrrs", mixers.map { i -> i.steps }.toString())
+                // Log.d("active mixerrrrr", activeMixer.steps.toString())
+            }
+        }
+
+        fun updateBeats() {
+            for (i in 0 until beats.size) {
+                if(activeMixer.steps[i]) {
+                    if(!beats[i].enabled) {
+                        beats[i].toggleActive()
+                    }
+                } else {
+                    if(beats[i].enabled) {
+                        beats[i].toggleActive()
+                    }
+                }
             }
         }
 
         for (i in 0 until mixersCount) {
             mixers[i].enabledButtonImageView.setOnClickListener {
-                mixers[i].toggleActive()
+                if(!mixers[i].enabled) {
+                    mixers[i].toggleActive()
+                    activeMixer.toggleActive()
+                    activeMixer = mixers[i]
+                    updateBeats()
+                }
             }
 
             // init steps of each mixers to false
@@ -91,7 +110,6 @@ class DrumMachineFragment : Fragment() {
             }
         }
 
-        // Set an error if the password is less than 8 characters.
         view.play_button.setOnClickListener {
             val timer = object: CountUpTimer(500) {
                 override fun onTick(millisElapsed: Long) {
