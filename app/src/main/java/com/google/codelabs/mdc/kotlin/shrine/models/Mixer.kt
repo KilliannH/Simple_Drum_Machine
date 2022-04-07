@@ -8,7 +8,7 @@ class Mixer(val enabledButtonImageView: ImageView) {
     var enabled = false
     var steps: ArrayList<Boolean> = ArrayList<Boolean>()
 
-    fun toggleActive() {
+    fun toggleEnabled() {
         if(enabled) {
             this.enabledButtonImageView.setImageResource(R.drawable.mixer_default)
             this.enabled = false

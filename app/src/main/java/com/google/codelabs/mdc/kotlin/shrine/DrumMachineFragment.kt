@@ -50,7 +50,7 @@ class DrumMachineFragment : Fragment() {
         }
 
         // enable the first mixer by default
-        mixers[0].toggleActive()
+        mixers[0].toggleEnabled()
         var activeMixer: Mixer = mixers[0]
 
         for (i in 0 until beatsCount) {
@@ -65,6 +65,7 @@ class DrumMachineFragment : Fragment() {
         }
 
         fun tickCb() {
+            // --- bug steps need to beats, not only booleans bcse they will have to update their active state.
             beats[beatIndex].toggleActive()
             if(lastBeat !== null) {
                 lastBeat!!.toggleActive()
@@ -119,8 +120,8 @@ class DrumMachineFragment : Fragment() {
         for (i in 0 until mixersCount) {
             mixers[i].enabledButtonImageView.setOnClickListener {
                 if(!mixers[i].enabled) {
-                    mixers[i].toggleActive()
-                    activeMixer.toggleActive()
+                    mixers[i].toggleEnabled()
+                    activeMixer.toggleEnabled()
                     activeMixer = mixers[i]
                     updateBeats()
                 }
