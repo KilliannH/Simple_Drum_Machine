@@ -1,7 +1,6 @@
 package com.google.codelabs.mdc.kotlin.shrine
 
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +55,7 @@ class DrumMachineFragment : Fragment() {
 
         for (i in 0 until beatsCount) {
             beats[i].imageView.setOnClickListener {
-                beats[i].toggleActive()
+                beats[i].toggleEnabled()
                 activeMixer.steps[i] = !activeMixer.steps[i]
 
                 // logs to see if original mixer has effectively changed, and it has.
@@ -66,12 +65,11 @@ class DrumMachineFragment : Fragment() {
         }
 
         fun tickCb() {
-            beats[beatIndex].imageView.setImageResource(R.drawable.rectangle_playing)
+            beats[beatIndex].toggleActive()
             if(lastBeat !== null) {
+                lastBeat!!.toggleActive()
                 if(lastBeat!!.enabled) {
-                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_active)
-                } else {
-                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_default)
+                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_enabled)
                 }
             }
             lastBeat = beats[beatIndex]
@@ -82,7 +80,7 @@ class DrumMachineFragment : Fragment() {
             }
         }
 
-        var timer = object : CountUpTimer(500) {
+        val timer = object : CountUpTimer(500) {
             override fun onTick(millisElapsed: Long) {
                 tickCb()
             }
@@ -92,14 +90,30 @@ class DrumMachineFragment : Fragment() {
             for (i in 0 until beats.size) {
                 if(activeMixer.steps[i]) {
                     if(!beats[i].enabled) {
-                        beats[i].toggleActive()
+                        beats[i].toggleEnabled()
                     }
                 } else {
                     if(beats[i].enabled) {
-                        beats[i].toggleActive()
+                        beats[i].toggleEnabled()
                     }
                 }
             }
+        }
+
+        fun resetBeats() {
+            for (i in 0 until beats.size) {
+                /*beats[i].active = false
+                if(beats[i].enabled) {
+                    beats[i].imageView.setImageResource(R.drawable.rectangle_enabled)
+                } else {
+                    beats[i].imageView.setImageResource(R.drawable.rectangle_default)
+                }*/
+                if(beats[i].active) {
+                    beats[i].toggleActive()
+                }
+            }
+            lastBeat = null
+            beatIndex = 0
         }
 
         for (i in 0 until mixersCount) {
@@ -127,6 +141,7 @@ class DrumMachineFragment : Fragment() {
                 view.play_button.setText(R.string.play_button)
                 timer.stop()
                 // do smthg to reset the timer & current beat index & unpaint active beat (red)
+                resetBeats()
             }
         }
 
