@@ -54,9 +54,9 @@ class DrumMachineFragment : Fragment() {
         var activeMixer: Mixer = mixers[0]
 
         for (i in 0 until beatsCount) {
-            beats[i].imageView.setOnClickListener {
+            beats[i].imageView?.setOnClickListener {
                 beats[i].toggleEnabled()
-                activeMixer.steps[i] = !activeMixer.steps[i]
+                activeMixer.beats[i].enabled = !activeMixer.beats[i].enabled
 
                 // logs to see if original mixer has effectively changed, and it has.
                 // Log.d("mixerrrrrs", mixers.map { i -> i.steps }.toString())
@@ -66,16 +66,19 @@ class DrumMachineFragment : Fragment() {
 
         fun tickCb() {
             // --- bug steps need to beats, not only booleans bcse they will have to update their active state.
+            // keep beats array to main independant visuals
+            // make imageView optionable on beats
+
             beats[beatIndex].toggleActive()
             if(lastBeat !== null) {
                 lastBeat!!.toggleActive()
                 if(lastBeat!!.enabled) {
-                    lastBeat!!.imageView.setImageResource(R.drawable.rectangle_enabled)
+                    lastBeat!!.imageView?.setImageResource(R.drawable.rectangle_enabled)
                 }
             }
             lastBeat = beats[beatIndex]
             if(beatIndex == 7) {
-                beatIndex = 0;
+                beatIndex = 0
             } else {
                 beatIndex++
             }
@@ -89,7 +92,7 @@ class DrumMachineFragment : Fragment() {
 
         fun updateBeats() {
             for (i in 0 until beats.size) {
-                if(activeMixer.steps[i]) {
+                if(activeMixer.beats[i].enabled) {
                     if(!beats[i].enabled) {
                         beats[i].toggleEnabled()
                     }
@@ -129,7 +132,7 @@ class DrumMachineFragment : Fragment() {
 
             // init steps of each mixers to false
             for(j in 0 until beatsCount) {
-                mixers[i].steps.add(false)
+                mixers[i].beats.add(Beat(null))
             }
         }
 
@@ -141,7 +144,6 @@ class DrumMachineFragment : Fragment() {
             } else {
                 view.play_button.setText(R.string.play_button)
                 timer.stop()
-                // do smthg to reset the timer & current beat index & unpaint active beat (red)
                 resetBeats()
             }
         }
