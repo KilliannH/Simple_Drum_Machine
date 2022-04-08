@@ -1,6 +1,7 @@
 package com.google.codelabs.mdc.kotlin.shrine
 
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.google.codelabs.mdc.kotlin.shrine.models.Beat
+import com.google.codelabs.mdc.kotlin.shrine.models.Marker
 import com.google.codelabs.mdc.kotlin.shrine.models.Mixer
+import com.google.codelabs.mdc.kotlin.shrine.models.Sound
 import com.google.codelabs.mdc.kotlin.shrine.timer.CountUpTimer
 import kotlinx.android.synthetic.main.drum_machine_fragment.view.*
+import me.angrybyte.circularslider.CircularSlider
 
 /**
  * Fragment representing the login screen for Shrine.
@@ -24,29 +28,40 @@ class DrumMachineFragment : Fragment() {
 
         // Snippet from "Navigate to the next Fragment" section goes here.
 
+        val sounds = ArrayList<Sound>()
+        sounds.add(Sound(R.raw.bd, "Kick", context))
+        sounds.add(Sound(R.raw.sd, "Snare", context))
+        sounds.add(Sound(R.raw.ch, "Hi Hat", context))
+
         val view = inflater.inflate(R.layout.drum_machine_fragment, container, false)
 
         var isPlaying = false
 
         val beats:ArrayList<Beat> = ArrayList<Beat>()
+        val markers:ArrayList<Marker> = ArrayList<Marker>()
         val mixers:ArrayList<Mixer> = ArrayList<Mixer>()
 
         val beatsCount:Int = view.beatsGroup.childCount
         val mixersCount:Int = view.mixersGroup.childCount
 
-        var lastBeat: Beat? = null
+        var lastMarker: Marker? = null
 
-        var beatIndex = 0
+        var markerIndex = 0
 
         // add beats from beatsGroup layout
         for (i in 0 until beatsCount) {
             beats.add(Beat(view.beatsGroup.getChildAt(i) as ImageView))
         }
 
+        // add markers from markersGroup layout
+        for (i in 0 until beatsCount) {
+            markers.add(Marker(view.markersGroup.getChildAt(i) as ImageView))
+        }
+
         // add mixers from mixersGroup layout
         for(i in 0 until mixersCount) {
             val mixerLayout: LinearLayout = view.mixersGroup.getChildAt(i) as LinearLayout
-            mixers.add(Mixer(mixerLayout.getChildAt(1) as ImageView))
+            mixers.add(Mixer(mixerLayout.getChildAt(0) as CircularSlider, mixerLayout.getChildAt(1) as ImageView, sounds[i]))
         }
 
         // enable the first mixer by default
@@ -69,18 +84,20 @@ class DrumMachineFragment : Fragment() {
             // keep beats array to main independant visuals
             // make imageView optionable on beats
 
-            beats[beatIndex].toggleActive()
-            if(lastBeat !== null) {
-                lastBeat!!.toggleActive()
-                if(lastBeat!!.enabled) {
-                    lastBeat!!.imageView?.setImageResource(R.drawable.rectangle_enabled)
+            markers[markerIndex].toggleActive()
+            for (mixer: Mixer in mixers) {
+                if(mixer.beats[markerIndex].enabled) {
+                    mixer.sound.play()
                 }
             }
-            lastBeat = beats[beatIndex]
-            if(beatIndex == 7) {
-                beatIndex = 0
+            if(lastMarker !== null) {
+                lastMarker!!.toggleActive()
+            }
+            lastMarker = markers[markerIndex]
+            if(markerIndex == 7) {
+                markerIndex = 0
             } else {
-                beatIndex++
+                markerIndex++
             }
         }
 
@@ -105,19 +122,13 @@ class DrumMachineFragment : Fragment() {
         }
 
         fun resetBeats() {
-            for (i in 0 until beats.size) {
-                /*beats[i].active = false
-                if(beats[i].enabled) {
-                    beats[i].imageView.setImageResource(R.drawable.rectangle_enabled)
-                } else {
-                    beats[i].imageView.setImageResource(R.drawable.rectangle_default)
-                }*/
-                if(beats[i].active) {
-                    beats[i].toggleActive()
+            for(i in 0 until beatsCount) {
+                if(markers[i].active) {
+                    markers[i].toggleActive()
                 }
             }
-            lastBeat = null
-            beatIndex = 0
+            lastMarker = null
+            markerIndex = 0
         }
 
         for (i in 0 until mixersCount) {
@@ -128,6 +139,10 @@ class DrumMachineFragment : Fragment() {
                     activeMixer = mixers[i]
                     updateBeats()
                 }
+            }
+
+            mixers[i].circularSlider.setOnSliderMovedListener {
+                Log.d("debuggg", it.toString())
             }
 
             // init steps of each mixers to false

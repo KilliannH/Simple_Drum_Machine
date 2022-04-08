@@ -215,9 +215,113 @@
                 android:contentDescription="beat8"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/markersGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:id="@+id/marker1"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker1" />
+            <ImageView
+                android:id="@+id/marker2"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker2" />
+            <ImageView
+                android:id="@+id/marker3"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker3" />
+            <ImageView
+                android:id="@+id/marker4"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker4" />
+            <ImageView
+                android:id="@+id/marker5"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker5"/>
+            <ImageView
+                android:id="@+id/marker6"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker6"/>
+            <ImageView
+                android:id="@+id/marker7"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker7"/>
+            <ImageView
+                android:id="@+id/marker8"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/circle_default"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="marker8"/>
+        </LinearLayout>
+
         <!-- Snippet from "Add buttons" section goes here. -->
         <RelativeLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

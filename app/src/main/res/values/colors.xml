@@ -6,10 +6,10 @@
     <color name="toolbarIconColor">#FFFFFF</color>
     <color name="drumMachinePageBackgroundColor">#FFFFFF</color>
     <color name="defaultBeatColor">#AFAFAF</color>
-    <color name="activeBeatColor">#03A9F4</color>
-    <color name="playingBeatColor">#E91E63</color>
+    <color name="enabledBeatColor">#03A9F4</color>
+    <color name="activeMarkerColor">#E91E63</color>
 
     <color name="defaultMixerColor">#AFAFAF</color>
-    <color name="activeMixerColor">#03A9F4</color>
+    <color name="enabledMixerColor">#03A9F4</color>
 
 </resources>
