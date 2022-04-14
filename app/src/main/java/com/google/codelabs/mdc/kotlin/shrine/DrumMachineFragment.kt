@@ -36,7 +36,9 @@ class DrumMachineFragment : Fragment() {
         // Snippet from "Navigate to the next Fragment" section goes here.
 
         // default values are fine (usage media, max streams 1)
-        val mSoundPool = SoundPool.Builder().build()
+        val mSoundPoolBuilder = SoundPool.Builder()
+        mSoundPoolBuilder.setMaxStreams(3)
+        val mSoundPool = mSoundPoolBuilder.build()
 
         val sounds = ArrayList<Sound>()
         sounds.add(Sound(R.raw.bd, mSoundPool, context))
@@ -115,7 +117,7 @@ class DrumMachineFragment : Fragment() {
             }
         }
 
-        val timer = object : CountUpTimer(500) {
+        val timer = object : CountUpTimer(250) {
             override fun onTick(millisElapsed: Long) {
                 tickCb()
             }
