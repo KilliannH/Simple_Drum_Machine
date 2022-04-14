@@ -2,23 +2,29 @@ package com.google.codelabs.mdc.kotlin.shrine.models
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.media.SoundPool
 
-class Sound(private val soundFile: Int, val name: String, private val context: Context?) {
+class Sound(private val soundFile: Int, val soundPool: SoundPool, private val context: Context?) {
 
-    private var mediaPlayer: MediaPlayer? = null
+    private var soundId: Int
 
-    fun load() {
-        mediaPlayer = MediaPlayer.create(context, soundFile)
+    init {
+        soundId = load()
+    }
+
+    fun load(): Int {
+        return soundPool.load(context, soundFile, 0)
+    }
+
+    fun getSoundId(): Int {
+        return soundId
     }
 
     fun play() {
-        if(mediaPlayer !== null) {
-            mediaPlayer!!.start()
-        }
+        soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F)
     }
 
-    fun release() {
-        mediaPlayer?.release()
-        mediaPlayer = null
+    fun unload(): Boolean {
+        return soundPool.unload(soundId)
     }
 }

@@ -1,5 +1,9 @@
 package com.google.codelabs.mdc.kotlin.shrine
 
+import android.content.Context
+
+import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 
@@ -8,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.google.codelabs.mdc.kotlin.shrine.models.Beat
 import com.google.codelabs.mdc.kotlin.shrine.models.Marker
@@ -22,16 +28,24 @@ import me.angrybyte.circularslider.CircularSlider
  */
 class DrumMachineFragment : Fragment() {
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         // Snippet from "Navigate to the next Fragment" section goes here.
 
+        // default values are fine (usage media, max streams 1)
+        val mSoundPool = SoundPool.Builder().build()
+
         val sounds = ArrayList<Sound>()
-        sounds.add(Sound(R.raw.bd, "Kick", context))
-        sounds.add(Sound(R.raw.sd, "Snare", context))
-        sounds.add(Sound(R.raw.ch, "Hi Hat", context))
+        sounds.add(Sound(R.raw.bd, mSoundPool, context))
+        sounds.add(Sound(R.raw.sd, mSoundPool, context))
+        sounds.add(Sound(R.raw.ch, mSoundPool, context))
+
+        for(sound: Sound in sounds) {
+            Log.d("sound", "Loaded w. soundId: " + sound.getSoundId())
+        }
 
         val view = inflater.inflate(R.layout.drum_machine_fragment, container, false)
 
