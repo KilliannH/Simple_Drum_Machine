@@ -1,7 +1,5 @@
 package com.google.codelabs.mdc.kotlin.shrine
 
-import android.content.Context
-
 import android.media.SoundPool
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
+
 import androidx.fragment.app.Fragment
 import com.google.codelabs.mdc.kotlin.shrine.models.Beat
 import com.google.codelabs.mdc.kotlin.shrine.models.Marker
@@ -41,13 +39,9 @@ class DrumMachineFragment : Fragment() {
         val mSoundPool = mSoundPoolBuilder.build()
 
         val sounds = ArrayList<Sound>()
-        sounds.add(Sound(R.raw.bd, mSoundPool, context))
-        sounds.add(Sound(R.raw.sd, mSoundPool, context))
-        sounds.add(Sound(R.raw.ch, mSoundPool, context))
-
-        for(sound: Sound in sounds) {
-            Log.d("sound", "Loaded w. soundId: " + sound.getSoundId())
-        }
+        sounds.add(Sound(R.raw.bd, 20, mSoundPool, context))
+        sounds.add(Sound(R.raw.sd, 2, mSoundPool, context))
+        sounds.add(Sound(R.raw.ch, 0, mSoundPool, context))
 
         val view = inflater.inflate(R.layout.drum_machine_fragment, container, false)
 
